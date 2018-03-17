@@ -6,15 +6,26 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import ventanas.VentanaPrincipal;
+import ventanasInternas.Reserva;
 
 public class PanelMenuAplicacion extends JPanel implements ActionListener {
 
 	private JButton reserva, disponibilidad, liberar, empleado, modificar, bajaEMpl;
+	private Connection con;
+	private PanelGestion pg;
 
-	public PanelMenuAplicacion(Connection con) {
+	public PanelMenuAplicacion(Connection con, PanelGestion panelGestion) {
+		
+		//global vars
+		this.con  = con;
+		this.pg = panelGestion;
 
 		// propiedades de panel menu
 		propiedadesPanelMenu();
@@ -93,7 +104,6 @@ public class PanelMenuAplicacion extends JPanel implements ActionListener {
 	public void propiedadesPanelMenu() {
 		this.setBackground(new java.awt.Color(0, 0, 0));
 		this.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 50));
-		//this.setSize(180, 800);
 		this.setPreferredSize(new Dimension(180, 800));
 	}
 
@@ -109,8 +119,17 @@ public class PanelMenuAplicacion extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		
-		
+		if(e.getSource()==reserva){
+			try {
+				Reserva re = new Reserva(con, null);
+				pg.getpMatriz().add(re);
+				re.setVisible(true);
+				SwingUtilities.updateComponentTreeUI(pg);
+				System.out.println("estoy en boton reserva");
+			} catch (SQLException e1) {
+				System.out.println("Error en la escucha al cargar el modulo de RESERVA");
+				e1.printStackTrace();
+			}
+		}
 	}
-
 }

@@ -13,7 +13,6 @@ public class Principal {
 		  * deberá tener al menos 7 campos
 		  * y deberá estar almacenado en una tabla de base de datos
 		  * 
-		  * 
 		  * la gestion debera permitir:
 		  * 	*gestionar
 		  * 	*listar
@@ -29,16 +28,9 @@ public class Principal {
 		  * 
 		  * intentar realizar un listado de informaciones en los paneles de listado
 		  * 
-		  * 
 		  * */
 		 ConexionBD bd = new ConexionBD();
 		 VentanaPrincipal v = new VentanaPrincipal(bd.getCon());
 		 
-		 /* 
-		  * 
-		  * 
-		  * ****/
-		 
 	}
-
 }

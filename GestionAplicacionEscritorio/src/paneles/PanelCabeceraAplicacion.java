@@ -17,7 +17,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import gestionHotel.Ventana;
 import ventanas.VentanaPrincipal;
 
 
@@ -25,24 +24,48 @@ public class PanelCabeceraAplicacion extends JPanel implements ActionListener{
 	
 	private JPanel panelLogo, panelUsuario;
 	private JLabel nom;
-	private JButton logout,cerrar;
+	private JButton cerrar;
 	private Image logo = null;
+	private Connection con;
+	private VentanaPrincipal v;
 	
-	public PanelCabeceraAplicacion(Connection con) {
+	public PanelCabeceraAplicacion(Connection con, VentanaPrincipal v) {
+		
+		//extraccion de Conexion y Ventana Principal para globalizar las variables
+		this.con = con;
+		this.v = v;
 		
 		//propiedades PanelCAbecera
-		this.setPreferredSize(new Dimension(1200, 150));
-		this.setBackground(new java.awt.Color(238, 112, 30));
-		this.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+		propiedadesPanelCabecera();
 		
 		//objetos
 		
-		//paneles
+		//paneles instanciados (revisar)
 		panelLogo = new JPanel();
 		panelUsuario = new JPanel();
 		
 		//propiedades de los paneles
 		//panelo logo
+		panelLogoEmpresa();
+		
+		//elementos agregados a panelUsuario
+		panelInfoUsuario();
+		
+		//agregacion de los paneles logo y usuario
+		this.add(panelLogo);
+		this.add(panelUsuario);
+		
+	}//end constructor
+
+	public void panelInfoUsuario() {
+		nom = new JLabel ("aqui va usu");
+		panelUsuario.add(nom);
+		cerrar = new JButton("Cerrar session");		
+		cerrar.addActionListener(this);
+		panelUsuario.add(cerrar);
+	}
+
+	public void panelLogoEmpresa() {
 		panelLogo.setBackground(new java.awt.Color(238, 112, 30));
 		panelLogo.setPreferredSize(new Dimension(994, 150));
 		panelLogo.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
@@ -58,27 +81,13 @@ public class PanelCabeceraAplicacion extends JPanel implements ActionListener{
 		} catch (IOException e) {
 			System.out.println("Error en la carga de la imagen logo");
 		}
-		
-		//elementos agregados a panelUsuario
-		nom = new JLabel ("aqui va usu");
-		panelUsuario.add(nom);
-		cerrar = new JButton("Cerrar session");		
-		cerrar.addActionListener(this);
-		panelUsuario.add(cerrar);
-		
-		this.add(panelLogo);
-		this.add(panelUsuario);
-		
-		//this.getContentPane().add(panelSuperior);
-		
-		
-		
-		
-		
-		
-		
-		
-	}//end constructor
+	}
+
+	public void propiedadesPanelCabecera() {
+		this.setPreferredSize(new Dimension(1200, 150));
+		this.setBackground(new java.awt.Color(238, 112, 30));
+		this.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+	}
 	
 	@Override
 	public void paint(Graphics g) {
@@ -91,11 +100,9 @@ public class PanelCabeceraAplicacion extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource()==cerrar){
-			//x.dispose();
-			VentanaPrincipal v = new VentanaPrincipal(connection);
+			v.dispose();
+			VentanaPrincipal v = new VentanaPrincipal(con);
 			v.setVisible(true);
 		}
-		
 	}
-
 }
