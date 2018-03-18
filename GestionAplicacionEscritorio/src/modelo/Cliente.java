@@ -1,36 +1,29 @@
 package modelo;
 
-import java.sql.Date;
-
 public class Cliente {
 
-	private String dni, nombre, apellidos, telefono, domicilio, email, pais, sexo;
-	private Date fechaNacimiento;
+	private String dni, nombre, apellidos, telefono, email, sexo;
 
 	public Cliente() {
 
 	}
 
-	public Cliente(String dni, String nombre, String apellidos, String telefono, String domicilio, String email,
-			String pais, String sexo, Date fechaNacimiento) {
+	public Cliente(String dni, String nombre, String apellidos, String telefono, String email, String sexo) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.telefono = telefono;
-		this.domicilio = domicilio;
 		this.email = email;
-		this.pais = pais;
 		this.sexo = sexo;
-		this.fechaNacimiento = fechaNacimiento;
 	}
 	
 
 	@Override
 	public String toString() {
 		return "Cliente [dni=" + dni + ", nombre=" + nombre + ", apellidos=" + apellidos + ", telefono=" + telefono
-				+ ", domicilio=" + domicilio + ", email=" + email + ", pais=" + pais + ", sexo=" + sexo
-				+ ", fechaNacimiento=" + fechaNacimiento + "]";
+				+ ", email=" + email +  ", sexo=" + sexo
+				+ "]";
 	}
 
 	public String getDni() {
@@ -65,28 +58,12 @@ public class Cliente {
 		this.telefono = telefono;
 	}
 
-	public String getDomicilio() {
-		return domicilio;
-	}
-
-	public void setDomicilio(String domicilio) {
-		this.domicilio = domicilio;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPais() {
-		return pais;
-	}
-
-	public void setPais(String pais) {
-		this.pais = pais;
 	}
 
 	public String getSexo() {
@@ -96,15 +73,5 @@ public class Cliente {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
-	
-	
 
 }

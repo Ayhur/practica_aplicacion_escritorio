@@ -13,19 +13,21 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import ventanas.VentanaPrincipal;
-import ventanasInternas.Reserva;
+import ventanasInternas.VentanaInternaReserva;
 
 public class PanelMenuAplicacion extends JPanel implements ActionListener {
 
 	private JButton reserva, disponibilidad, liberar, empleado, modificar, bajaEMpl;
 	private Connection con;
 	private PanelGestion pg;
+	private VentanaPrincipal v;
 
-	public PanelMenuAplicacion(Connection con, PanelGestion panelGestion) {
-		
-		//global vars
-		this.con  = con;
+	public PanelMenuAplicacion(Connection con, PanelGestion panelGestion, VentanaPrincipal v) {
+
+		// global vars
+		this.con = con;
 		this.pg = panelGestion;
+		this.v = v;
 
 		// propiedades de panel menu
 		propiedadesPanelMenu();
@@ -35,11 +37,11 @@ public class PanelMenuAplicacion extends JPanel implements ActionListener {
 
 		// instanciacion las escuchas de los botones
 		escuchasDeBotonesMenu();
-		
-		//propidades para los botones (estilos)
+
+		// propidades para los botones (estilos)
 		estilosYPropiedadesDeLosBotones();
-		
-		//agregacion de los botones al panel
+
+		// agregacion de los botones al panel
 		this.add(reserva);
 		this.add(disponibilidad);
 		this.add(liberar);
@@ -83,7 +85,7 @@ public class PanelMenuAplicacion extends JPanel implements ActionListener {
 		bajaEMpl.setContentAreaFilled(false);
 		bajaEMpl.setBorderPainted(false);
 		bajaEMpl.setFocusPainted(false);
-		
+
 		reserva.setForeground(Color.WHITE);
 		disponibilidad.setForeground(Color.WHITE);
 		liberar.setForeground(Color.WHITE);
@@ -118,14 +120,13 @@ public class PanelMenuAplicacion extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		if(e.getSource()==reserva){
+
+		if (e.getSource() == reserva) {
 			try {
-				Reserva re = new Reserva(con, null);
+				VentanaInternaReserva re = new VentanaInternaReserva(con, null);
 				pg.getpMatriz().add(re);
 				re.setVisible(true);
-				SwingUtilities.updateComponentTreeUI(pg);
-				System.out.println("estoy en boton reserva");
+				
 			} catch (SQLException e1) {
 				System.out.println("Error en la escucha al cargar el modulo de RESERVA");
 				e1.printStackTrace();

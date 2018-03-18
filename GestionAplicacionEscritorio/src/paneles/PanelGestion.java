@@ -23,9 +23,10 @@ public class PanelGestion extends JPanel {
 
 		// agregacion de los paneles al panel gestion
 		this.add(new PanelCabeceraAplicacion(con, v));
-		this.add(new PanelMenuAplicacion(con,this));
+		this.add(new PanelMenuAplicacion(con,this,v));
 		//this.add(pMatriz);
-		this.add(new PanelMatrizAplicacion());
+		this.add(pMatriz);
+		//this.add(new PanelMatrizAplicacion()); borrar
 	}
 
 	public PanelMatrizAplicacion getpMatriz() {
